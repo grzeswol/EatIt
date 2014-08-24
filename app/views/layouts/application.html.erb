@@ -7,8 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="wrapper">
+    <div class="header">
+      <h1>EatIt</h1>
+      <p>Your favorite shop online!</p>
+    </div>
 
-<%= yield %>
+    <p style="color: green"><%= flash[:notice] %></p>
 
+    <div class="sidebar">
+      (sidebar)
+    </div>
+
+    <div class="main">
+      <%= yield %>
+    </div>
+
+    <div class="footer">
+      EatIt online shop<br/>
+    </div>
+</div>
 </body>
 </html>
