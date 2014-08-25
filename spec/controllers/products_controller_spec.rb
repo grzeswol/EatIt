@@ -26,7 +26,8 @@ RSpec.describe ProductsController, :type => :controller do
   let(:valid_attributes) {
 		{
 		title: "Green Grapes",
-		price: 2.00,
+		price: 2.12,
+		stock: 4,
 		description: "something",
 		image_url: "green_grapes.jpg",
 		}
@@ -37,6 +38,7 @@ RSpec.describe ProductsController, :type => :controller do
 		title: "=-///",
 		price: "qerwerewq",
 		description: "   ~~~~~~~ ",
+		stock: -4,
 		image_url: "////.1234",
 		}
   }
@@ -49,7 +51,7 @@ RSpec.describe ProductsController, :type => :controller do
   describe "GET index" do
     it "assigns all products as @products" do
       product = Product.create! valid_attributes
-      get :index, {}, valid_session
+      get :index#, {}, valid_session
       expect(assigns(:products)).to eq([product])
     end
   end
@@ -116,6 +118,7 @@ RSpec.describe ProductsController, :type => :controller do
 				{
 					title: "Purple Grapes",
 					price: 2.25,
+					stock: 4,
 					description: "something else",
 					image_url: "purple_grapes.jpg",
 				}

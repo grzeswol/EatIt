@@ -11,6 +11,26 @@ require 'rails_helper'
 #   end
 # end
 #
-# RSpec.describe ProductsHelper, :type => :helper do
-#   pending "add some examples to (or delete) #{__FILE__}"
-# end
+RSpec.describe ProductsHelper, :type => :helper do
+	describe ProductsHelper do
+		describe "print price" do
+			it 'adds $ sign to a price' do
+				expect(helper.print_price(2.00)).to eq("$2.00")
+			end
+		end
+
+		describe 'print stock' do
+			product = Product.new({:title => "Grapes", :price => 2.00, :stock => 4, :description => "Green grapes", :image_url => "gg.jpg",})
+			it 'prints number in stock ' do
+				expect(helper.print_stock(product.stock)).to eq("<span class=\"in_stock\">In Stock (#{product.stock})</span>")
+			end
+
+			it 'prints out of stock when out of stock' do
+				product = Product.new({:title => "Grapes", :price => 2.00, :stock => 0, :description => "Green grapes", :image_url => "gg.jpg",})
+				expect(helper.print_stock(product.stock)).to eq("<span class=\"out_stock\">Out of Stock</span>")
+			end
+		end
+	end
+end
+
+
