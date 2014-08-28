@@ -133,16 +133,20 @@ RSpec.describe OrderItemsController, :type => :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested order_item" do
-      order_item = OrderItem.create! valid_attributes
+		  order = FactoryGirl.create(:order_with_order_items, order_items_count: 3)
+      order_item = order.order_items.first
+			session[:order_id] = 1
       expect {
         delete :destroy, {:id => order_item.to_param}, valid_session
       }.to change(OrderItem, :count).by(-1)
     end
 
     it "redirects to the order_items list" do
-      order_item = OrderItem.create! valid_attributes
+		  order = FactoryGirl.create(:order_with_order_items, order_items_count: 3)
+      order_item = order.order_items.first
+			session[:order_id] = 1
       delete :destroy, {:id => order_item.to_param}, valid_session
-      expect(response).to redirect_to(order_items_url)
+      expect(response).to redirect_to(order_url)
     end
   end
 

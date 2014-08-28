@@ -40,8 +40,9 @@ class OrderItemsController < ApplicationController
   # DELETE /order_items/1.json
   def destroy
     @order_item.destroy
+		@current_order = Order.find_by(id: session[:order_id])
     respond_to do |format|
-      format.html { redirect_to order_items_url, notice: 'Order item was successfully destroyed.' }
+      format.html { redirect_to @current_order, notice: 'Order item was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
