@@ -36,7 +36,7 @@ RSpec.describe OrderItemsController, :type => :controller do
 		{
 			:product_id => "wrong",
 			:order_id => "wrong",
-			:quantity => "wrong",
+			:quantity => -4,
 		}
   }
 
@@ -91,12 +91,14 @@ RSpec.describe OrderItemsController, :type => :controller do
       let(:new_attributes) {
 				{
 					:product_id => 2,
-					:order_id => 2,
+					:order_id => 1,
 					:quantity => 4,
 				}
 			}
 
+      
       it "updates the requested order_item" do
+				order = FactoryGirl.create(:order)
         order_item = OrderItem.create! valid_attributes
         put :update, {:id => order_item.to_param, :order_item => new_attributes}, valid_session
         order_item.reload
@@ -104,20 +106,32 @@ RSpec.describe OrderItemsController, :type => :controller do
       end
 
       it "assigns the requested order_item as @order_item" do
+				order = FactoryGirl.create(:order)
         order_item = OrderItem.create! valid_attributes
         put :update, {:id => order_item.to_param, :order_item => valid_attributes}, valid_session
         expect(assigns(:order_item)).to eq(order_item)
       end
 
-      it "redirects to the order_item" do
+      it "redirects to the order" do
+				order = FactoryGirl.create(:order)
         order_item = OrderItem.create! valid_attributes
         put :update, {:id => order_item.to_param, :order_item => valid_attributes}, valid_session
-        expect(response).to redirect_to(order_item)
+        expect(response).to redirect_to(order)
       end
     end
 
+		it "deletes the order_item if quantity = 0" do
+				order = FactoryGirl.create(:order)
+        order_item = FactoryGirl.create(:order_item)
+        updated_order_item = FactoryGirl.attributes_for(:order_item, quantity: 0)
+				expect {
+        put :update, {:id => order_item.to_param, :order_item => updated_order_item}, valid_session
+				}.to change(OrderItem, :count).by(-1)
+      end
+
     describe "with invalid params" do
       it "assigns the order_item as @order_item" do
+				order = FactoryGirl.create(:order)
         order_item = OrderItem.create! valid_attributes
         put :update, {:id => order_item.to_param, :order_item => invalid_attributes}, valid_session
         expect(assigns(:order_item)).to eq(order_item)

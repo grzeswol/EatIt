@@ -20,15 +20,22 @@ RSpec.describe ProductsHelper, :type => :helper do
 		end
 
 		describe 'print stock' do
-			product = Product.new({:title => "Grapes", :price => 2.00, :stock => 4, :description => "Green grapes", :image_url => "gg.jpg",})
+			product = FactoryGirl.create(:product, stock: 4)
 			it 'prints number in stock ' do
 				expect(helper.print_stock(product.stock)).to eq("<span class=\"in_stock\">In Stock (#{product.stock})</span>")
 			end
 
 			it 'prints out of stock when out of stock' do
-				product = Product.new({:title => "Grapes", :price => 2.00, :stock => 0, :description => "Green grapes", :image_url => "gg.jpg",})
+				product = FactoryGirl.create(:product, stock: 0)
 				expect(helper.print_stock(product.stock)).to eq("<span class=\"out_stock\">Out of Stock</span>")
 			end
+
+			it 'prints insufficient stock when request > stock' do
+				product = FactoryGirl.create(:product, stock: 2)
+				expect(helper.print_stock(product.stock, 4)).to eq("<span class=\"low_stock\">Insufficent stock (#{product.stock})</span>")
+			end
+
+
 		end
 	end
 end
