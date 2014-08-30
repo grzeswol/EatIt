@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
 	validates_presence_of :status
 	has_many :order_items, dependent: :destroy
+	belongs_to :user
 
 	def total
 		sum = 0

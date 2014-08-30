@@ -7,9 +7,26 @@ FactoryGirl.define do
 		product
 	end
 
+	factory :user do
+		provider "twitter"
+		uid "1234"
+		name "sample_name"
+
+		factory :user_with_orders do
+			ignore do
+				orders_count 5
+			end
+
+			after(:create) do |user, evaluator|
+				create_list(:order, evaluator.orders_count, user: user)
+			end
+		end
+	end
+
 	factory :order do
 		user_id 1
 		status "unsubmitted"
+		user
 
 		factory :order_with_order_items do
 			ignore do

@@ -43,3 +43,5 @@ end
 gem 'simplecov', :require => false, :group => :test
 gem 'factory_girl_rails'
 gem 'database_cleaner'
+gem 'omniauth'
+gem 'omniauth-twitter'
