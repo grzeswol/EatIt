@@ -9,7 +9,7 @@
 <body>
 <div class="wrapper">
     <div class="header">
-			<h1><%= link_to "EatIt", root_path, id: "logo" %></h1>
+			<h1>EatIt</h1>
       <p>Your favorite shop online!</p>
     </div>
 

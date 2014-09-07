@@ -228,7 +228,3 @@ div.field_with_errors input{
 .error_messages ul li{
   font-weight: bold;
 }
-
-#logo {
-  color:white
-}

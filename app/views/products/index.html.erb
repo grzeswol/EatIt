@@ -19,7 +19,9 @@
 				<td><%= print_price(product.price) %></td>
 				<td><%= print_stock(product.stock) %></td>
 				<td><%= link_to 'Show details', product_path(product) %></td>
+				<% if current_user %>
 				<td><%= button_to 'Add to Cart', order_items_path(product_id: product.id) %></td>
+				<% end %>
       </tr>
     <% end %>
   </tbody>
