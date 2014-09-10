@@ -7,6 +7,15 @@ FactoryGirl.define do
 		product
 	end
 
+	factory :address do
+    line1 "Line1"
+    line2 "Line2"
+    city "City"
+		country "Country"
+    user_id 1
+		user
+  end
+
 	factory :user do
 		provider "twitter"
 		uid "1234"
@@ -21,12 +30,24 @@ FactoryGirl.define do
 				create_list(:order, evaluator.orders_count, user: user)
 			end
 		end
+
+		
+		factory :user_with_addresses do
+			ignore do
+				addresses_count 5
+			end
+
+			after(:create) do |user, evaluator|
+				create_list(:address, evaluator.addresses_count, user: user)
+			end
+		end
 	end
 
 	factory :order do
 		user_id 1
 		status "unsubmitted"
 		user
+		address
 
 		factory :order_with_order_items do
 			ignore do

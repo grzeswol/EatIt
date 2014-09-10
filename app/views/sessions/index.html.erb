@@ -1,0 +1,7 @@
+<h2>Welcome, <%= @user.name %>!</h2>
+
+<p>Your Addresses:</p>
+<%= @user.addresses.collect do |a| %>
+	<p><%= a.to_s %>, <%= link_to 'Remove', a, method: :delete %></p>
+<% end %>
+<p><%= link_to "Add an address", new_address_path %></p>

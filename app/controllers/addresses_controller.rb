@@ -28,7 +28,7 @@ class AddressesController < ApplicationController
 
     respond_to do |format|
       if @address.save
-        format.html { redirect_to Order.find(session[:order_id]), notice: 'Address was successfully created.' }
+        format.html { redirect_to session[:return_to], notice: 'Address was successfully created.' }
         format.json { render :show, status: :created, location: @address }
       else
         format.html { render :new }
@@ -56,7 +56,7 @@ class AddressesController < ApplicationController
   def destroy
     @address.destroy
     respond_to do |format|
-      format.html { redirect_to addresses_url, notice: 'Address was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Address was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class AddressesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def address_params
-      params.require(:address).permit(:line1, :line2, :city, :zip, :user_id)
+      params.require(:address).permit(:line1, :line2, :city, :country, :user_id)
     end
 end

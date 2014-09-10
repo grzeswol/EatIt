@@ -1,4 +1,11 @@
 class SessionsController < ApplicationController
+
+	def index
+		@user = current_user
+		store_location
+	end
+
+
 	def create
 		@user = User.find_or_create_by_auth(request.env["omniauth.auth"])
 		session[:user_id] = @user.id
