@@ -8,6 +8,7 @@ RSpec.describe SessionsController, :type => :controller do
 			'uid' => '123545',
 			'user_info' => {
 				'name' => 'mockuser',
+				'image' => 'image.jpg',
 			},
 			'credentials' => {
 				'token' => 'mock_token',

@@ -111,7 +111,7 @@ RSpec.describe OrdersController, :type => :controller do
       let(:new_attributes) {
 				{
 					:user_id => 4,
-					:status => "Submitted",
+					:status => "submitted",
 				}
 			}
 
@@ -119,7 +119,7 @@ RSpec.describe OrdersController, :type => :controller do
         order = Order.create! valid_attributes
         put :update, {:id => order.to_param, :order => new_attributes}, valid_session
         order.reload
-				expect(order.status).to eq("Submitted")
+				expect(order.status).to eq("submitted")
       end
 
       it "assigns the requested order as @order" do
@@ -131,7 +131,7 @@ RSpec.describe OrdersController, :type => :controller do
       it "redirects to the order" do
         order = Order.create! valid_attributes
         put :update, {:id => order.to_param, :order => valid_attributes}, valid_session
-        expect(response).to redirect_to(order)
+        expect(response).to redirect_to(confirm_order_path(order))
       end
     end
 
