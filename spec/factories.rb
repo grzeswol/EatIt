@@ -20,6 +20,7 @@ FactoryGirl.define do
 		provider "twitter"
 		uid "1234"
 		name "sample_name"
+		image "image.jpg"
 
 		factory :user_with_orders do
 			ignore do
