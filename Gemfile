@@ -38,6 +38,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
 	gem 'sqlite3'
+	gem 'simplecov', :require => false
+	gem 'factory_girl_rails'
+	gem 'database_cleaner'
 end
 
 group :production do
@@ -45,8 +48,5 @@ group :production do
 end
 
 
-gem 'simplecov', :require => false, :group => :test
-gem 'factory_girl_rails'
-gem 'database_cleaner'
 gem 'omniauth'
 gem 'omniauth-twitter'
