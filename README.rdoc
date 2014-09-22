@@ -1,2 +1,3 @@
 == EatIt
 It is simple shopping application. It uses twitter omniauth gem for handling users. Testing using rspec and factory girl gems.
+Please see it on Heroku http://vast-meadow-5743.herokuapp.com/
